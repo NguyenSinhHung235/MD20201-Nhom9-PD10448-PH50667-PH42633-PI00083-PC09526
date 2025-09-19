@@ -7,23 +7,93 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-  <header><div class="header-inner">Thống kê — KhoaHocHay</div></header>
-  <main class="container">
+<header>
+  <div class="header-inner">
+    <a th:href="@{/}" style="text-decoration:none;color:white;display:flex;align-items:center;gap:0.5rem;">← Trang chủ</a>
+    <span style="margin-left:auto;margin-right:auto">Thống kê & Báo cáo</span>
+  </div>
+</header>
+
+<main class="container">
   <div class="card">
-    <h3>Tổng quan</h3>
+    <h3>Tổng quan hệ thống</h3>
     <div class="metrics">
-      <div class="metric"><strong id="totalUsers">-</strong><div>Số tài khoản</div></div>
-      <div class="metric"><strong id="totalStudents">-</strong><div>Số học viên</div></div>
-      <div class="metric"><strong id="totalRevenue">-</strong><div>Tổng doanh thu (VND)</div></div>
-      <div class="metric"><strong id="totalCourses">-</strong><div>Số khóa học</div></div>
+      <div class="metric">
+        <strong>1,245</strong>
+        <div>Tổng tài khoản</div>
+      </div>
+      <div class="metric">
+        <strong>987</strong>
+        <div>Học viên</div>
+      </div>
+      <div class="metric">
+        <strong>156.8M</strong>
+        <div>Doanh thu (VND)</div>
+      </div>
+      <div class="metric">
+        <strong>28</strong>
+        <div>Khóa học</div>
+      </div>
+      <div class="metric">
+        <strong>45</strong>
+        <div>Giảng viên</div>
+      </div>
+      <div class="metric">
+        <strong>94%</strong>
+        <div>Hoàn thành khóa học</div>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <h3>Danh sách khóa & học viên</h3>
-    <table id="courseStats"><thead><tr><th>Khóa</th><th>Học viên</th><th>Doanh thu</th></tr></thead><tbody></tbody></table>
+  <div class="row" style="margin-top:2rem">
+    <div class="card" style="flex:1;min-width:400px">
+      <h3>Top khóa học phổ biến</h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Khóa học</th>
+          <th>Học viên</th>
+          <th>Doanh thu</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Lập trình Web cơ bản</td>
+          <td>156</td>
+          <td>187.2M ₫</td>
+        </tr>
+        <tr>
+          <td>Tiếng Anh giao tiếp</td>
+          <td>134</td>
+          <td>107.2M ₫</td>
+        </tr>
+        <tr>
+          <td>Marketing Online</td>
+          <td>89</td>
+          <td>89.0M ₫</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="flex:1;min-width:400px">
+      <h3>Hoạt động gần đây</h3>
+      <div style="padding:1rem">
+        <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid #eee">
+          <span>Đăng ký khóa học mới</span>
+          <span style="color:#666">2 giờ trước</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid #eee">
+          <span>Hoàn thành thanh toán</span>
+          <span style="color:#666">5 giờ trước</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.5rem 0">
+          <span>Đánh giá khóa học</span>
+          <span style="color:#666">1 ngày trước</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <script th:src="@{/css/mock.js}"></script>
 </main>
 </body>
 </html>

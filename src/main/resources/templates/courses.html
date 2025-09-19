@@ -7,38 +7,90 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-  <header><div class="header-inner">Quản lý khóa học — KhoaHocHay</div></header>
-  <main class="container">
-  <div class="card">
-    <h2>Tạo / Chỉnh sửa khóa học</h2>
-    <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap">
-      <div style="flex:1;min-width:260px">
-        <label>Tiêu đề<input id="title"></label>
-        <label>Mô tả<textarea id="desc" rows="4"></textarea></label>
-        <label>Giá (VND)<input id="price" type="number" min="0"></label>
-        <label>Danh mục
-          <select id="cat">
-            <option>IT</option><option>Design</option><option>Marketing</option>
+<header>
+  <div class="header-inner">
+    <a th:href="@{/}" style="text-decoration:none;color:white;display:flex;align-items:center;gap:0.5rem;">← Trang chủ</a>
+    <span style="margin-left:auto;margin-right:auto">Quản lý khóa học</span>
+  </div>
+</header>
+
+<main class="container">
+  <div class="row">
+    <section class="card" style="flex:1;min-width:350px">
+      <h3>Thêm khóa học mới</h3>
+      <form>
+        <label>Tên khóa học
+          <input type="text" placeholder="Nhập tên khóa học..." required>
+        </label>
+        <label>Mô tả
+          <textarea rows="3" placeholder="Mô tả khóa học..."></textarea>
+        </label>
+        <label>Giảng viên
+          <select>
+            <option>Chọn giảng viên...</option>
+            <option>Nguyễn Văn A</option>
+            <option>Trần Thị B</option>
           </select>
         </label>
-        <div style="margin-top:8px"><button class="btn" onclick="createCourse()">Lưu</button></div>
-      </div>
-      <div style="flex:1;min-width:260px">
-        <h4>Preview</h4>
-        <div id="preview" style="background:#fbfbff;padding:10px;border-radius:6px"></div>
-      </div>
-    </div>
-  </div>
+        <label>Giá (VND)
+          <input type="number" placeholder="Nhập giá..." min="0">
+        </label>
+        <label>Danh mục
+          <select>
+            <option>Công nghệ</option>
+            <option>Kinh doanh</option>
+            <option>Nghệ thuật</option>
+            <option>Ngôn ngữ</option>
+          </select>
+        </label>
+        <div style="margin-top:1rem">
+          <button class="btn" type="submit">Tạo khóa học</button>
+        </div>
+      </form>
+    </section>
 
-  <div class="card" style="margin-top:12px">
-    <h3>Danh sách khóa học</h3>
-    <input id="q" placeholder="Tìm theo tiêu đề..." style="padding:8px;border-radius:6px;border:1px solid #ddd">
-    <table id="coursesTable">
-      <thead><tr><th>ID</th><th>Tiêu đề</th><th>Giá</th><th>Giảng viên</th><th>Actions</th></tr></thead>
-      <tbody></tbody>
-    </table>
+    <section class="card" style="flex:2;min-width:600px">
+      <h3>Danh sách khóa học</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên khóa học</th>
+            <th>Giảng viên</th>
+            <th>Giá</th>
+            <th>Học viên</th>
+            <th>Thao tác</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>KH001</td>
+            <td>Lập trình Web cơ bản</td>
+            <td>Nguyễn Văn A</td>
+            <td>1.200.000 ₫</td>
+            <td>45</td>
+            <td>
+              <button class="btn small">Sửa</button>
+              <button class="btn small" style="background:#dc3545;margin-left:0.5rem">Xóa</button>
+            </td>
+          </tr>
+          <tr>
+            <td>KH002</td>
+            <td>Tiếng Anh giao tiếp</td>
+            <td>Trần Thị B</td>
+            <td>800.000 ₫</td>
+            <td>67</td>
+            <td>
+              <button class="btn small">Sửa</button>
+              <button class="btn small" style="background:#dc3545;margin-left:0.5rem">Xóa</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
-  <script th:src="@{/css/mock.js}"></script>
 </main>
 </body>
 </html>

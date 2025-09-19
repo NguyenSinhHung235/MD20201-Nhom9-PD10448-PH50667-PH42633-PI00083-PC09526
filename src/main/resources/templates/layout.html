@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} ?: 'KhoaHocHay'">KhoaHocHay</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>KhoaHocHay</h1>
+    <nav>
+        <a th:href="@{/}">Trang chủ</a> |
+        <a th:href="@{/courses}">Khóa học</a> |
+        <a th:href="@{/lessons}">Bài học</a> |
+        <a th:href="@{/payments}">Thanh toán</a> |
+        <a th:href="@{/stats}">Thống kê</a> |
+        <a th:href="@{/account}">Tài khoản</a>
+    </nav>
+</header>
+
+<main th:insert="${content}"></main>
+
+<footer>
+    <p>© 2025 KhoaHocHay - Học mọi lúc, mọi nơi</p>
+</footer>
+</body>
+</html>

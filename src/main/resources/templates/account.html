@@ -1,44 +1,203 @@
 <!doctype html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Quản lý tài khoản - KhoaHocHay</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-  <header><div class="header-inner">Quản lý tài khoản — KhoaHocHay</div></header>
-  <main class="container">
+
+<header>
+  <div class="header-inner">
+    <a th:href="@{/}" style="text-decoration:none;color:white;display:flex;align-items:center;gap:0.5rem;">← Trang chủ</a>
+    <span style="margin-left:auto;margin-right:auto">Quản lý tài khoản</span>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Flash Messages -->
+  <div th:if="${successMessage}" class="alert alert-success" style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:20px;border:1px solid #c3e6cb;">
+    <span th:text="${successMessage}"></span>
+  </div>
+  <div th:if="${errorMessage}" class="alert alert-danger" style="background:#f8d7da;color:#721c24;padding:12px;border-radius:6px;margin-bottom:20px;border:1px solid #f5c6cb;">
+    <span th:text="${errorMessage}"></span>
+  </div>
+
   <div class="row">
-    <section class="card" style="flex:0 0 320px">
-      <h3>Thêm tài khoản</h3>
-      <form id="addUser" th:action="@{/account}" method="post">
-        <label>Email<input type="email" id="email" name="email" required></label>
-        <label>Mật khẩu<input type="password" id="pwd" name="password" required></label>
+    <!-- Form Section -->
+    <section class="card" style="flex:1;min-width:300px">
+      <h3 th:text="${isEdit ? 'Sửa tài khoản' : 'Thêm tài khoản mới'}">Thêm tài khoản mới</h3>
+
+      <!-- Form cho chỉnh sửa -->
+      <form th:if="${isEdit}" th:action="@{/account/edit/{id}(id=${userId})}"
+            th:object="${userForm}" method="post">
+
+        <label>Email
+          <input type="email" th:field="*{email}" required placeholder="nhập email...">
+        </label>
+
+        <label>Mật khẩu (để trống nếu không đổi)
+          <input type="password" th:field="*{password}" placeholder="nhập mật khẩu mới...">
+        </label>
+
         <label>Vai trò
-          <select id="role" name="role">
-            <option>Student</option>
-            <option>Teacher</option>
-            <option>Admin</option>
+          <select th:field="*{role}" required>
+            <option value="">Chọn vai trò</option>
+            <option value="STUDENT">Học viên</option>
+            <option value="TEACHER">Giảng viên</option>
+            <option value="ADMIN">Quản trị viên</option>
           </select>
         </label>
-        <div style="margin-top:10px"><button class="btn" type="submit">Tạo</button></div>
+
+        <label>Họ và tên
+          <input type="text" th:field="*{fullName}" placeholder="nhập họ tên...">
+        </label>
+
+        <label>Số điện thoại
+          <input type="text" th:field="*{phone}" placeholder="nhập số điện thoại...">
+        </label>
+
+        <div style="margin-top:1rem;display:flex;gap:10px;">
+          <button class="btn" type="submit">Cập nhật</button>
+          <a th:href="@{/account}" class="btn" style="background:#6c757d;">Hủy</a>
+        </div>
+      </form>
+
+      <!-- Form cho tạo mới -->
+      <form th:unless="${isEdit}" th:action="@{/account}"
+            th:object="${userForm}" method="post">
+
+        <label>Email
+          <input type="email" th:field="*{email}" required placeholder="nhập email...">
+        </label>
+
+        <label>Mật khẩu
+          <input type="password" th:field="*{password}" required placeholder="nhập mật khẩu...">
+        </label>
+
+        <label>Vai trò
+          <select th:field="*{role}" required>
+            <option value="">Chọn vai trò</option>
+            <option value="STUDENT">Học viên</option>
+            <option value="TEACHER">Giảng viên</option>
+            <option value="ADMIN">Quản trị viên</option>
+          </select>
+        </label>
+
+        <label>Họ và tên
+          <input type="text" th:field="*{fullName}" placeholder="nhập họ tên...">
+        </label>
+
+        <label>Số điện thoại
+          <input type="text" th:field="*{phone}" placeholder="nhập số điện thoại...">
+        </label>
+
+        <div style="margin-top:1rem;">
+          <button class="btn" type="submit">Tạo tài khoản</button>
+        </div>
       </form>
     </section>
 
-    <section class="card" style="flex:1 1 600px">
-      <h3>Danh sách tài khoản</h3>
-      <div style="margin-bottom:10px" class="controls">
-        <input id="q" placeholder="Tìm kiếm email..." style="padding:8px;border:1px solid #ddd;border-radius:6px">
-        <button class="btn" onclick="renderUsers()">Tìm</button>
+    <!-- User List Section -->
+    <section class="card" style="flex:2;min-width:500px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h3>Danh sách tài khoản</h3>
+        <div style="color:#666;font-size:0.9rem;">
+          Tổng: <span th:text="${#lists.size(users)}">0</span> tài khoản
+        </div>
       </div>
-      <table id="userTable">
-        <thead><tr><th>ID</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
-        <tbody></tbody>
-      </table>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Họ tên</th>
+            <th>Vai trò</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="user : ${users}">
+            <td th:text="${user.id}">1</td>
+            <td th:text="${user.email}">user@example.com</td>
+            <td th:text="${user.fullName} ?: 'Chưa cập nhật'">Nguyễn Văn A</td>
+            <td>
+                <span th:if="${user.role == 'STUDENT'}"
+                      style="background:#e3f2fd;color:#1976d2;padding:0.25rem 0.5rem;border-radius:12px;font-size:0.8rem">
+                  Học viên
+                </span>
+              <span th:if="${user.role == 'TEACHER'}"
+                    style="background:#f3e5f5;color:#7b1fa2;padding:0.25rem 0.5rem;border-radius:12px;font-size:0.8rem">
+                  Giảng viên
+                </span>
+              <span th:if="${user.role == 'ADMIN'}"
+                    style="background:#ffebee;color:#c62828;padding:0.25rem 0.5rem;border-radius:12px;font-size:0.8rem">
+                  Quản trị
+                </span>
+            </td>
+            <td>
+              <a th:href="@{'/account/toggle-status/' + ${user.id}}"
+                 th:style="${user.active} ? 'background:#28a745;' : 'background:#6c757d;'"
+                 class="btn small">
+                <span th:text="${user.active} ? 'Đang hoạt động' : 'Đã khóa'">Đang hoạt động</span>
+              </a>
+            </td>
+            <td>
+              <div style="display:flex;gap:5px;flex-wrap:wrap;">
+                <a th:href="@{'/account/edit/' + ${user.id}}"
+                   class="btn small"
+                   style="background:#ffc107;color:#000;">
+                  Sửa
+                </a>
+                <a th:href="@{'/account/delete/' + ${user.id}}"
+                   class="btn small"
+                   style="background:#dc3545;"
+                   onclick="return confirmDelete(event)">
+                  Xóa
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(users)}">
+            <td colspan="6" style="text-align:center;color:#666;padding:2rem;">
+              Chưa có tài khoản nào. Hãy tạo tài khoản đầu tiên!
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   </div>
-  <script th:src="@{/css/mock.js}"></script>
 </main>
+
+<script>
+  // Confirm before deleting
+  function confirmDelete(event) {
+    if (!confirm('Bạn có chắc chắn muốn xóa tài khoản này?')) {
+      event.preventDefault();
+    }
+  }
+
+  // Auto-hide flash messages after 5 seconds
+  setTimeout(function() {
+    var alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      alert.style.display = 'none';
+    });
+  }, 5000);
+
+  // Add confirm to all delete links
+  document.addEventListener('DOMContentLoaded', function() {
+    var deleteLinks = document.querySelectorAll('a[href*="/account/delete/"]');
+    deleteLinks.forEach(function(link) {
+      link.addEventListener('click', confirmDelete);
+    });
+  });
+</script>
+
 </body>
 </html>

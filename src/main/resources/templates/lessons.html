@@ -7,28 +7,88 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-  <header><div class="header-inner">Quản lý bài học — KhoaHocHay</div></header>
-  <main class="container">
+<header>
+  <div class="header-inner">
+    <a th:href="@{/}" style="text-decoration:none;color:white;display:flex;align-items:center;gap:0.5rem;">← Trang chủ</a>
+    <span style="margin-left:auto;margin-right:auto">Quản lý bài học</span>
+  </div>
+</header>
+
+<main class="container">
   <div class="card">
-    <h2>Thêm / Sửa bài học</h2>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <div style="flex:1;min-width:260px">
-        <label>Chọn khóa học
-          <select id="courseSelect"></select>
-        </label>
-        <label>Tiêu đề bài học<input id="lessonTitle"></label>
-        <label>Nội dung (mô tả)<textarea id="lessonContent" rows="4"></textarea></label>
-        <label>Video link (YouTube/Vimeo)<input id="video"></label>
-        <label>Thứ tự<input id="order" type="number" value="1" min="1"></label>
-        <div style="margin-top:8px"><button class="btn" onclick="createLesson()">Lưu bài</button></div>
+    <h2>Quản lý bài học</h2>
+    <div class="row">
+      <div style="flex:1;min-width:300px">
+        <h3>Thêm bài học mới</h3>
+        <form>
+          <label>Chọn khóa học
+            <select>
+              <option>Lập trình Web cơ bản</option>
+              <option>Tiếng Anh giao tiếp</option>
+              <option>Marketing Online</option>
+            </select>
+          </label>
+          <label>Tiêu đề bài học
+            <input type="text" placeholder="Nhập tiêu đề...">
+          </label>
+          <label>Nội dung
+            <textarea rows="4" placeholder="Mô tả bài học..."></textarea>
+          </label>
+          <label>Video URL
+            <input type="url" placeholder="https://...">
+          </label>
+          <label>Tài liệu đính kèm
+            <input type="file">
+          </label>
+          <label>Thứ tự
+            <input type="number" value="1" min="1">
+          </label>
+          <div style="margin-top:1rem">
+            <button class="btn" type="submit">Lưu bài học</button>
+          </div>
+        </form>
       </div>
-      <div style="flex:1;min-width:260px">
-        <h4>Danh sách bài</h4>
-        <table id="lessonsTable"><thead><tr><th>ID</th><th>Course</th><th>Title</th><th>Order</th><th>Action</th></tr></thead><tbody></tbody></table>
+
+      <div style="flex:1;min-width:400px">
+        <h3>Danh sách bài học</h3>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Khóa học</th>
+              <th>Tiêu đề</th>
+              <th>Thứ tự</th>
+              <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>BL001</td>
+              <td>Lập trình Web</td>
+              <td>Giới thiệu HTML</td>
+              <td>1</td>
+              <td>
+                <button class="btn small">Sửa</button>
+                <button class="btn small" style="background:#dc3545;margin-left:0.5rem">Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td>BL002</td>
+              <td>Lập trình Web</td>
+              <td>CSS cơ bản</td>
+              <td>2</td>
+              <td>
+                <button class="btn small">Sửa</button>
+                <button class="btn small" style="background:#dc3545;margin-left:0.5rem">Xóa</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-  <script th:src="@{/css/mock.js}"></script>
 </main>
 </body>
 </html>
