@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý tài khoản - KhoaHocHay</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <header><div class="header-inner">Quản lý tài khoản — KhoaHocHay</div></header>
+  <main class="container">
+  <div class="row">
+    <section class="card" style="flex:0 0 320px">
+      <h3>Thêm tài khoản</h3>
+      <form id="addUser" th:action="@{/account}" method="post">
+        <label>Email<input type="email" id="email" name="email" required></label>
+        <label>Mật khẩu<input type="password" id="pwd" name="password" required></label>
+        <label>Vai trò
+          <select id="role" name="role">
+            <option>Student</option>
+            <option>Teacher</option>
+            <option>Admin</option>
+          </select>
+        </label>
+        <div style="margin-top:10px"><button class="btn" type="submit">Tạo</button></div>
+      </form>
+    </section>
+
+    <section class="card" style="flex:1 1 600px">
+      <h3>Danh sách tài khoản</h3>
+      <div style="margin-bottom:10px" class="controls">
+        <input id="q" placeholder="Tìm kiếm email..." style="padding:8px;border:1px solid #ddd;border-radius:6px">
+        <button class="btn" onclick="renderUsers()">Tìm</button>
+      </div>
+      <table id="userTable">
+        <thead><tr><th>ID</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+  <script th:src="@{/css/mock.js}"></script>
+</main>
+</body>
+</html>

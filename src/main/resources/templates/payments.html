@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý thanh toán - KhoaHocHay</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <header><div class="header-inner">Quản lý thanh toán — KhoaHocHay</div></header>
+  <main class="container">
+  <div class="card">
+    <h3>Giỏ hàng (mock)</h3>
+    <div id="cartArea"></div>
+    <div style="margin-top:10px"><button class="btn" onclick="checkout()">Thanh toán (mô phỏng)</button></div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Lịch sử giao dịch</h3>
+    <table id="paymentsTable"><thead><tr><th>ID</th><th>Student</th><th>Course</th><th>Amount</th><th>Method</th><th>Status</th></tr></thead><tbody></tbody></table>
+  </div>
+  <script th:src="@{/css/mock.js}"></script>
+</main>
+</body>
+</html>

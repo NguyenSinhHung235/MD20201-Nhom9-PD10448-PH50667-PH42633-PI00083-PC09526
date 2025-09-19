@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý khóa học - KhoaHocHay</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <header><div class="header-inner">Quản lý khóa học — KhoaHocHay</div></header>
+  <main class="container">
+  <div class="card">
+    <h2>Tạo / Chỉnh sửa khóa học</h2>
+    <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <label>Tiêu đề<input id="title"></label>
+        <label>Mô tả<textarea id="desc" rows="4"></textarea></label>
+        <label>Giá (VND)<input id="price" type="number" min="0"></label>
+        <label>Danh mục
+          <select id="cat">
+            <option>IT</option><option>Design</option><option>Marketing</option>
+          </select>
+        </label>
+        <div style="margin-top:8px"><button class="btn" onclick="createCourse()">Lưu</button></div>
+      </div>
+      <div style="flex:1;min-width:260px">
+        <h4>Preview</h4>
+        <div id="preview" style="background:#fbfbff;padding:10px;border-radius:6px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Danh sách khóa học</h3>
+    <input id="q" placeholder="Tìm theo tiêu đề..." style="padding:8px;border-radius:6px;border:1px solid #ddd">
+    <table id="coursesTable">
+      <thead><tr><th>ID</th><th>Tiêu đề</th><th>Giá</th><th>Giảng viên</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script th:src="@{/css/mock.js}"></script>
+</main>
+</body>
+</html>

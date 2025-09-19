@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thống kê - KhoaHocHay</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <header><div class="header-inner">Thống kê — KhoaHocHay</div></header>
+  <main class="container">
+  <div class="card">
+    <h3>Tổng quan</h3>
+    <div class="metrics">
+      <div class="metric"><strong id="totalUsers">-</strong><div>Số tài khoản</div></div>
+      <div class="metric"><strong id="totalStudents">-</strong><div>Số học viên</div></div>
+      <div class="metric"><strong id="totalRevenue">-</strong><div>Tổng doanh thu (VND)</div></div>
+      <div class="metric"><strong id="totalCourses">-</strong><div>Số khóa học</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Danh sách khóa & học viên</h3>
+    <table id="courseStats"><thead><tr><th>Khóa</th><th>Học viên</th><th>Doanh thu</th></tr></thead><tbody></tbody></table>
+  </div>
+  <script th:src="@{/css/mock.js}"></script>
+</main>
+</body>
+</html>
