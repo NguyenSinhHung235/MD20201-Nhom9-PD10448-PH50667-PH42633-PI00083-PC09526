@@ -1,1 +1,2 @@
 Day 1: Initial setup
+Day 2: Core modules
