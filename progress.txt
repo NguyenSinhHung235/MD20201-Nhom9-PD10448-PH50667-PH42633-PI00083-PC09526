@@ -1,3 +1,4 @@
 Day 1: Initial setup
 Day 2: Core modules
 Day 3: Auth system
+Day 4: Database setup
