@@ -4,3 +4,4 @@ Day 3: Auth system
 Day 4: Database setup
 Day 5: UI components
 Day 6: Bug fixes
+Day 7: API development
