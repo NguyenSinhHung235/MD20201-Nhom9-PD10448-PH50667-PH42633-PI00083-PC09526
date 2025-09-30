@@ -9,3 +9,4 @@ Day 8: Optimization
 Day 9: Caching
 Day 10: Testing
 Day 11: Documentation
+Day 12: Security
