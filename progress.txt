@@ -10,3 +10,4 @@ Day 9: Caching
 Day 10: Testing
 Day 11: Documentation
 Day 12: Security
+Day 13: Error handling
