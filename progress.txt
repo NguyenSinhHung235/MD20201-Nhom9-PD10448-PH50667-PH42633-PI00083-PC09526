@@ -16,3 +16,4 @@ Day 15: Performance
 Day 16: Third-party
 Day 17: Refactoring
 Day 18: Dashboard
+Day 19: Compatibility
