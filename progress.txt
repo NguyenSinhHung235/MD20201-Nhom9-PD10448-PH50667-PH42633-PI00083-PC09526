@@ -24,3 +24,4 @@ Day 23: Notifications
 Day 24: Memory
 Day 25: Multi-language
 Day 26: Search
+Day 27: CI/CD
